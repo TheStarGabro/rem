@@ -1,6 +1,7 @@
 local environment = assert(getgenv, "<OH> ~ Your exploit is not supported")()
 
 if environment.rem_active then return end
+print("asd")
 environment.rem_active = true
 
 if oh then
