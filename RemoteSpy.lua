@@ -1,5 +1,5 @@
 local RemoteSpy = {}
-local Remote = import("objects/Remote")
+local Remote = import("Remote")
 
 local requiredMethods = {
     ["checkCaller"] = true,
