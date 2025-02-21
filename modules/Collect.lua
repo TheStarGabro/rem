@@ -36,7 +36,7 @@ function Collect:Start()
     collectThread = task.spawn(function()
         while task.wait(DELAY) do
             print("Collect")
-            Collec.CollectAll()
+            Collect.CollectAll()
         end
     end)
     janitor:Add(collectThread)
