@@ -10,7 +10,7 @@ local rep = "rem"
 local branch = "main"
 local importCache = {}
 
-if environment.is_active then
+if environment.rem_active then
     environment.janitor:Clean()
     return
 end
@@ -221,4 +221,4 @@ useMethods(import("methods/table"))
 useMethods(import("methods/userdata"))
 useMethods(import("methods/environment"))
 
-environment.is_active = true
+environment.rem_active = true
