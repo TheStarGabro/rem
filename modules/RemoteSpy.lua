@@ -1,7 +1,14 @@
-local RemoteSpy = {}
+local RemoteSpy = loadedModules.RemoteSpy
 
+if RemoteSpy then
+    return RemoteSpy
+end
+
+RemoteSpy = {}
 local Remote = import("constructors/Remote")
 local Signal = import("constructors/Signal")
+
+loadedModules.RemoteSpy = RemoteSpy
 
 local requiredMethods = {
     ["checkCaller"] = true,
