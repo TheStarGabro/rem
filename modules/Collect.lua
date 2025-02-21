@@ -8,7 +8,7 @@ local CurrencyGetRegistry = game.ReplicatedStorage.Knit.Services.WorldCurrencySe
 local PickupWorldCurrency = game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RE.PickupWorldCurrency
 
 local EntityGetRegistry = game.ReplicatedStorage.Knit.Services.EntityService.RF.GetRegistry
-local DestroyEObject = game.ReplicatedStorage.Knit.Services.EntityService.RE.DestroyEObject
+local ProcessDObject = game.ReplicatedStorage.Knit.Services.EntityService.RE.ProcessDObject
 
 local collectThread
 local currencyRegistry
@@ -26,7 +26,7 @@ function Collect:CollectAll()
     end
 
     for _,entity in enemyRegistry do
-        DestroyEObject:FireServer(entity.GUID)
+        ProcessDObject:FireServer(entity.GUID)
     end
 end
 
