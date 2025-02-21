@@ -3,6 +3,8 @@ loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem
 print("b")
 local RemoteSpy = import("modules/RemoteSpy")
 
-RemoteSpy.Remote.Event:Connect(function(...)
-    print(...)
-end)
+janitor:Add(
+    RemoteSpy.Remote.Event:Connect(function(...)
+        print(...)
+    end)
+)
