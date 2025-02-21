@@ -46,7 +46,15 @@ local methodHooks = {
 local currentRemotes = {}
 
 local remoteDataEvent = Instance.new("BindableEvent")
-local eventSet = true
+local eventSet = false
+
+local function connectEvent(callback)
+    if not eventSet then
+        eventSet = true
+    end
+
+    return remoteDataEvent.Event:Connect(callback)
+end
 
 local nmcTrampoline
 nmcTrampoline = hookMetaMethod(game, "__namecall", function(...)
@@ -86,7 +94,7 @@ nmcTrampoline = hookMetaMethod(game, "__namecall", function(...)
             }
 
             remote.IncrementCalls(remote, call)
-            remoteDataEvent:Fire(instance, call)
+            remoteDataEvent.Fire(remoteDataEvent, instance, call)
         end
 
         if remoteBlocked or argsBlocked then

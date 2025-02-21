@@ -6,6 +6,6 @@ print("Initiated")
 
 local RemoteSpy = import("modules/RemoteSpy")
 
-janitor:Add(
-
-)
+janitor:Add(RemoteSpy.ConnectEvent(function(instance,info)
+    print(instance)
+end))
