@@ -10,10 +10,10 @@ local rep = "rem"
 local branch = "main"
 local importCache = {}
 
-if environment.rem_active then return end
-environment.rem_active = true
-
-environment.janitor:Clean()
+if environment.is_active then
+    environment.janitor:Clean()
+    return
+end
 
 local function hasMethods(methods)
     for name in pairs(methods) do
@@ -220,3 +220,5 @@ useMethods(import("methods/string"))
 useMethods(import("methods/table"))
 useMethods(import("methods/userdata"))
 useMethods(import("methods/environment"))
+
+environment.is_active = true
