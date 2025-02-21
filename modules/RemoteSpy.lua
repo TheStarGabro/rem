@@ -5,7 +5,7 @@ if RemoteSpy then
 end
 
 RemoteSpy = {}
-local Remote = import("Remote")
+local Remote = import("constructors/Remote")
 
 loadedModules.RemoteSpy = RemoteSpy
 

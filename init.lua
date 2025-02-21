@@ -13,6 +13,8 @@ local importCache = {}
 if environment.rem_active then return end
 environment.rem_active = true
 
+environment.janitor:Clean()
+
 local function hasMethods(methods)
     for name in pairs(methods) do
         if not environment[name] then
@@ -211,6 +213,8 @@ function environment.import(asset)
 end
 
 useMethods({ import = environment.import })
+
+useMethods({ janitor = import("constructors/Janitor").new() })
 
 useMethods(import("methods/string"))
 useMethods(import("methods/table"))
