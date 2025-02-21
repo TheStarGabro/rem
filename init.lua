@@ -11,9 +11,7 @@ local branch = "main"
 local importCache = {}
 
 if environment.rem_active then return end
-
 environment.rem_active = true
-environment.loadedModules = {}
 
 local function hasMethods(methods)
     for name in pairs(methods) do
@@ -36,6 +34,8 @@ end
 if Window and PROTOSMASHER_LOADED then
     getgenv().get_script_function = nil
 end
+
+useMethods({loadedModules = {}})
 
 local globalMethods = {
     checkCaller = checkcaller,
@@ -216,5 +216,3 @@ useMethods(import("methods/string"))
 useMethods(import("methods/table"))
 useMethods(import("methods/userdata"))
 useMethods(import("methods/environment"))
-
---import("ui/main")
