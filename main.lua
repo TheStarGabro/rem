@@ -5,7 +5,17 @@ loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem
 print("Initiated")
 
 local RemoteSpy = import("modules/RemoteSpy")
+local Signal = import("Signal")
 
-janitor:Add(RemoteSpy.ConnectEvent(function(instance,info)
-    print(instance)
-end))
+local OnEventMulti = Signal.newChanged()
+
+janitor:Add(
+    RemoteSpy.Signal:Connect(function(instance,info)
+        OnEventMulti:TryFire(instance)
+    end),
+
+    ZoneChanged(game.ReplicatedStorage.Knit.Services.ZoneService.RE.ZoneLoaded):Connect(function()
+        print("zoneloaded")
+    end)
+)
+

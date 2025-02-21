@@ -6,6 +6,7 @@ end
 
 RemoteSpy = {}
 local Remote = import("constructors/Remote")
+local Signal = import("Signal")
 
 loadedModules.RemoteSpy = RemoteSpy
 
@@ -45,7 +46,7 @@ local methodHooks = {
 
 local currentRemotes = {}
 
-local remoteDataEvent = Instance.new("BindableEvent")
+local remoteSignal = Signal.new()
 local eventSet = false
 
 local function connectEvent(callback)
@@ -53,7 +54,7 @@ local function connectEvent(callback)
         eventSet = true
     end
 
-    return remoteDataEvent.Event:Connect(callback)
+    return remoteSignal:Connect(callback)
 end
 
 local nmcTrampoline
@@ -72,7 +73,7 @@ nmcTrampoline = hookMetaMethod(game, "__namecall", function(...)
         method = "InvokeServer"
     end
         
-    if remotesViewing[instance.ClassName] and instance ~= remoteDataEvent and remoteMethods[method] then
+    if remotesViewing[instance.ClassName] and remoteMethods[method] then
         local remote = currentRemotes[instance]
         local vargs = {select(2, ...)}
             
@@ -94,7 +95,7 @@ nmcTrampoline = hookMetaMethod(game, "__namecall", function(...)
             }
 
             remote.IncrementCalls(remote, call)
-            remoteDataEvent.Fire(remoteDataEvent, instance, call)
+            remoteSignal:Fire(instance, call)
         end
 
         if remoteBlocked or argsBlocked then
@@ -127,7 +128,7 @@ for _name, hook in pairs(methodHooks) do
             if (not success) then return originalMethod(...) end
         end
 
-        if instance.ClassName == _name and remotesViewing[instance.ClassName] and instance ~= remoteDataEvent then
+        if instance.ClassName == _name and remotesViewing[instance.ClassName] then
             local remote = currentRemotes[instance]
             local vargs = {select(2, ...)}
 
@@ -147,7 +148,7 @@ for _name, hook in pairs(methodHooks) do
                 }
     
                 remote:IncrementCalls(call)
-                remoteDataEvent:Fire(instance, call)
+                remoteSignal:Fire(instance, call)
             end
 
             if remote.Blocked or remote:AreArgsBlocked(vargs) then
@@ -166,6 +167,6 @@ RemoteSpy.CurrentRemotes = currentRemotes
 RemoteSpy.ConnectEvent = connectEvent
 RemoteSpy.RequiredMethods = requiredMethods
 
-RemoteSpy.Remote = remoteDataEvent
+RemoteSpy.Signal = remoteSignal
 
 return RemoteSpy
