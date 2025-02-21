@@ -20,18 +20,22 @@ janitor:Add(
     end),
 
     OnEventMulti(game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RE.PickupWorldCurrency):Connect(function(info)
-        print("World")
+        --print("World")
         for i,v in info do
-            print(i,v)
+            --print(i,v)
         end
     end),
 
     OnEventMulti(game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RE.PickupUniqueWorldCurrency):Connect(function(info)
-        print("Unique")
+        --print("Unique")
         for i,v in info do
-            print(i,v)
+            --print(i,v)
         end
     end)
 )
 
-CollectCurrencies:Start()
+--CollectCurrencies:Start()
+
+for _,v in game.ReplicatedStorage.Knit.Services:GetDescendants() do
+    print(v:GetFullName())
+end

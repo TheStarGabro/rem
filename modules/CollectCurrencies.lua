@@ -1,41 +1,51 @@
-local CollectCurrencies = {}
+local Collect = {}
 
-local DELAY = 1
+local DELAY = 10
 
 local RunService = game:GetService("RunService")
 
-local GetRegistry = game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RF.GetRegistry
+local CurrencyGetRegistry = game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RF.GetRegistry
 local PickupWorldCurrency = game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RE.PickupWorldCurrency
 
+local EntityGetRegistry = game.ReplicatedStorage.Knit.Services.EntityService.RF.GetRegistry
+local DestroyEObject = game.ReplicatedStorage.Knit.Services.EntityService.RE.DestroyEObject
+
 local collectThread
-local registry
+local currencyRegistry
+local enemyRegistry
 
 -- PickupWorldCurrency
 -- PickupUniqueWorldCurrency
 
-function CollectCurrencies:CollectAll()
-    registry = registry or GetRegistry:InvokeServer()
-    for _,currency in registry do
+function Collect:CollectAll()
+    currencyRegistry = currencyRegistry or CurrencyGetRegistry:InvokeServer()
+    enemyRegistry = enemyRegistry or EntityGetRegistry:InvokeServer()
+    
+    for _,currency in currencyRegistry do
         PickupWorldCurrency:FireServer(currency.GUID)
+    end
+
+    for _,entity in enemyRegistry do
+        DestroyEObject:FireServer(entity.GUID)
     end
 end
 
-function CollectCurrencies:Start()
-    CollectCurrencies:Stop()
+function Collect:Start()
+    Collect:Stop()
     
     collectThread = task.spawn(function()
         while task.wait(DELAY) do
             print("Collect")
-            CollectCurrencies.CollectAll()
+            Collec.CollectAll()
         end
     end)
     janitor:Add(collectThread)
 end
 
-function CollectCurrencies:Stop()
+function Collect:Stop()
     if collectThread then
         task.cancel(collectThread)
     end
 end
 
-return CollectCurrencies
+return Collect
