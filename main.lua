@@ -6,14 +6,6 @@ print("Initiated")
 
 local RemoteSpy = import("modules/RemoteSpy")
 
-local blacklist = {
-    "UpdateCharacterState" = true
-}
-
 janitor:Add(
-    RemoteSpy.Remote.Event:Connect(function(remote,call)
-        if not blacklist[remote.Name] then
-            print(remote:GetFullName())
-        end
-    end)
+
 )
