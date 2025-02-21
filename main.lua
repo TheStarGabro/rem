@@ -11,10 +11,14 @@ local OnEventMulti = Signal.newChanged()
 
 janitor:Add(
     RemoteSpy.Signal:Connect(function(instance,info)
+        if instance == game.ReplicatedStorage.Knit.Services.ZoneService.RE.ZoneLoaded then
+            print("zoneloaded from signal")
+        end
+        
         OnEventMulti:TryFire(instance)
     end),
 
-    ZoneChanged(game.ReplicatedStorage.Knit.Services.ZoneService.RE.ZoneLoaded):Connect(function()
+    OnEventMulti(game.ReplicatedStorage.Knit.Services.ZoneService.RE.ZoneLoaded):Connect(function()
         print("zoneloaded")
     end)
 )

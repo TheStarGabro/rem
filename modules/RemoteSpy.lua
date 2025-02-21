@@ -47,7 +47,7 @@ local methodHooks = {
 local currentRemotes = {}
 
 local remoteSignal = Signal.new()
-local eventSet = false
+local eventSet = true
 
 local function connectEvent(callback)
     if not eventSet then
