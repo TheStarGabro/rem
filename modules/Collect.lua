@@ -20,11 +20,13 @@ local entityRegistry
 -- PickupWorldCurrency
 -- PickupUniqueWorldCurrency
 
+function Collect:Registers()
+    currencyRegistry = CurrencyGetRegistry:InvokeServer()
+    destructibleRegistry = DestructibleGetRegistry:InvokeServer()
+    entityRegistry = EntityGetRegistry:InvokeServer()
+end
+
 function Collect:CollectAll()
-    currencyRegistry = currencyRegistry or CurrencyGetRegistry:InvokeServer()
-    destructibleRegistry = destructibleRegistry or DestructibleGetRegistry:InvokeServer()
-    entityRegistry = entityRegistry or EntityGetRegistry:InvokeServer()
-    
     for _,currency in currencyRegistry do
         PickupWorldCurrency:FireServer(currency.GUID)
     end
@@ -40,7 +42,9 @@ end
 
 function Collect:Start()
     Collect:Stop()
-    
+
+    Collect:Registers()
+
     collectThread = task.spawn(function()
         Collect:CollectAll()
         while task.wait(DELAY) do
@@ -56,5 +60,7 @@ function Collect:Stop()
         task.cancel(collectThread)
     end
 end
+
+Collect:Registers()
 
 return Collect
