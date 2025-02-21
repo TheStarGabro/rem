@@ -29,6 +29,7 @@ function CollectCurrencies:Start()
             CollectCurrencies.CollectAll()
         end
     end)
+    janitor:Add(collectThread)
 end
 
 function CollectCurrencies:Stop()
