@@ -6,7 +6,7 @@ end
 
 RemoteSpy = {}
 local Remote = import("constructors/Remote")
-local Signal = import("Signal")
+local Signal = import("constructors/Signal")
 
 loadedModules.RemoteSpy = RemoteSpy
 

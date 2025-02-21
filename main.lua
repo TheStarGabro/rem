@@ -5,7 +5,7 @@ loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem
 print("Initiated")
 
 local RemoteSpy = import("modules/RemoteSpy")
-local Signal = import("Signal")
+local Signal = import("constructors/Signal")
 
 local OnEventMulti = Signal.newChanged()
 
