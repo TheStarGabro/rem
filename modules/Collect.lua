@@ -8,7 +8,7 @@ local CurrencyGetRegistry = game.ReplicatedStorage.Knit.Services.WorldCurrencySe
 local PickupWorldCurrency = game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RE.PickupWorldCurrency
 
 local EntityGetRegistry = game.ReplicatedStorage.Knit.Services.EntityService.RF.GetRegistry
-local ProcessDObject = game.ReplicatedStorage.Knit.Services.EntityService.RE.ProcessDObject
+local ProcessDObject = game.ReplicatedStorage.Knit.Services.EntityService.RF.ProcessDObject
 
 local collectThread
 local currencyRegistry
