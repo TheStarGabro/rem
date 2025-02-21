@@ -12,11 +12,25 @@ local OnEventMulti = Signal.newChanged()
 
 janitor:Add(
     RemoteSpy.Signal:Connect(function(instance,info)
-        OnEventMulti:TryFire(instance)
+        OnEventMulti:TryFire(instance,info)
     end),
 
-    OnEventMulti(game.ReplicatedStorage.Knit.Services.ZoneService.RE.ZoneLoaded):Connect(function()
+    OnEventMulti(game.ReplicatedStorage.Knit.Services.ZoneService.RE.ZoneLoaded):Connect(function(info)
         CollectCurrencies:Start()
+    end),
+
+    OnEventMulti(game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RE.PickupWorldCurrency):Connect(function(info)
+        print("World")
+        for i,v in info do
+            print(i,v)
+        end
+    end),
+
+    OnEventMulti(game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RE.PickupUniqueWorldCurrency):Connect(function(info)
+        print("Unique")
+        for i,v in info do
+            print(i,v)
+        end
     end)
 )
 

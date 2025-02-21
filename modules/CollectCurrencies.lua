@@ -8,23 +8,25 @@ local GetRegistry = game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RF
 local PickupWorldCurrency = game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RE.PickupWorldCurrency
 
 local collectThread
+local registry
 
-function CollectCurrencies:CollectAllNormal()
-    for i,currency in pairs(GetRegistry:InvokeServer()) do
+-- PickupWorldCurrency
+-- PickupUniqueWorldCurrency
+
+function CollectCurrencies:CollectAll()
+    registry = registry or GetRegistry:InvokeServer()
+    for _,currency in registry do
         PickupWorldCurrency:FireServer(currency.GUID)
     end
 end
 
 function CollectCurrencies:Start()
     CollectCurrencies:Stop()
-
-    local registry = GetRegistry:InvokeServer()
     
     collectThread = task.spawn(function()
         while task.wait(DELAY) do
-            for _,currency in registry do
-                PickupWorldCurrency:FireServer(currency.GUID)
-            end
+            print("Collect")
+            CollectCurrencies.CollectAll()
         end
     end)
 end
