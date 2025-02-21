@@ -1,9 +1,5 @@
 local environment = assert(getgenv, "<OH> ~ Your exploit is not supported")()
 
-if environment.rem_active then return end
-print("asd")
-environment.rem_active = true
-
 if oh then
     oh.Exit()
 end
@@ -12,6 +8,11 @@ local web = true
 local user = "TheStarGabro" -- change if you're using a fork
 local branch = "main"
 local importCache = {}
+
+if environment.rem_active then return end
+
+environment.rem_active = true
+environment.loadedModules = {}
 
 local function hasMethods(methods)
     for name in pairs(methods) do
