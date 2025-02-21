@@ -42,11 +42,12 @@ function Collect:Start()
     Collect:Stop()
     
     collectThread = task.spawn(function()
+        Collect:CollectAll()
         while task.wait(DELAY) do
-            print("Collect")
             Collect:CollectAll()
         end
     end)
+    
     janitor:Add(collectThread)
 end
 
