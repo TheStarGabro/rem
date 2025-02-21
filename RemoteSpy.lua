@@ -48,7 +48,7 @@ local currentRemotes = {}
 local remoteDataEvent = Instance.new("BindableEvent")
 local eventSet = false
 
-remoteDataEvent:Connect(function()
+remoteDataEvent.Event:Connect(function()
     eventSet = true
 end)
 
