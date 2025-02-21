@@ -6,7 +6,7 @@ print("Initiated")
 
 local RemoteSpy = import("modules/RemoteSpy")
 local Signal = import("constructors/Signal")
-local CollectCurrencies = import("modules/CollectCurrencies")
+local Collect = import("modules/Collect")
 
 local OnEventMulti = Signal.newChanged()
 
@@ -16,7 +16,7 @@ janitor:Add(
     end),
 
     OnEventMulti(game.ReplicatedStorage.Knit.Services.ZoneService.RE.ZoneLoaded):Connect(function(info)
-        CollectCurrencies:Start()
+        Collect:Start()
     end),
 
     OnEventMulti(game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RE.PickupWorldCurrency):Connect(function(info)
@@ -34,8 +34,4 @@ janitor:Add(
     end)
 )
 
---CollectCurrencies:Start()
-
-for _,v in game.ReplicatedStorage.Knit.Services:GetDescendants() do
-    print(v:GetFullName())
-end
+Collect:Start()
