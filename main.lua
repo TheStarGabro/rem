@@ -3,7 +3,8 @@
 loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/init.lua"))()
 print("Initiated")
 
-local print = import("modules/Output").print
+local pr = import("modules/Output").print
+print(pr)
 
 local RemoteSpy = import("modules/RemoteSpy")
 local Signal = import("constructors/Signal")
