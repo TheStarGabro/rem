@@ -2,7 +2,7 @@
 
 loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/init.lua"))()
 print("Initiated")
-
+print"asd"
 local pr = import("modules/Output").print
 print(pr)
 
