@@ -1,5 +1,8 @@
 local environment = assert(getgenv, "<OH> ~ Your exploit is not supported")()
 
+local rem = environment.REM or {}
+environment.REM = rem
+
 if oh then
     oh.Exit()
 end
@@ -10,14 +13,18 @@ local rep = "rem"
 local branch = "main"
 local importCache = {}
 
-if environment.rem_active then
-    environment.janitor:Clean()
+if rem.active then
+    rem.janitor:Clean()
     return
 end
 
+rem.active = true
+
+--###
+
 local function hasMethods(methods)
     for name in pairs(methods) do
-        if not environment[name] then
+        if not rem[name] then
             return false
         end
     end
@@ -28,7 +35,7 @@ end
 local function useMethods(module)
     for name, method in pairs(module) do
         if method then
-            environment[name] = method
+            rem[name] = method
         end
     end
 end
@@ -104,8 +111,8 @@ globalMethods.getUpvalues = function(closure)
     return oldGetUpvalues(closure)
 end
 
-environment.hasMethods = hasMethods
-environment.oh = {
+rem.hasMethods = hasMethods
+rem.oh = {
     Events = {},
     Hooks = {},
     Cache = importCache,
@@ -192,7 +199,15 @@ end
 
 useMethods(globalMethods)
 
-function environment.import(asset)
+--# Adding import
+
+local sha = game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://api.github.com/repos/" .. "TheStarGabro" .. "/".."rem".."/branches/".."main")).commit.sha
+
+if sha ~= rem.sha then
+    table.clear(rem.import)
+end
+
+function rem.import(asset)
     if importCache[asset] then
         return unpack(importCache[asset])
     end
@@ -212,13 +227,13 @@ function environment.import(asset)
     return unpack(assets)
 end
 
-useMethods({ import = environment.import })
+rem.sha = sha
 
-useMethods({ janitor = import("constructors/Janitor").new() })
+--# Post import
+
+rem.janitor = import("constructors/Janitor").new()
 
 useMethods(import("methods/string"))
 useMethods(import("methods/table"))
 useMethods(import("methods/userdata"))
 useMethods(import("methods/environment"))
-
-environment.rem_active = true

@@ -1,14 +1,14 @@
-local RemoteSpy = loadedModules.RemoteSpy
+local import = rem.import
+local hookMetaMethod = rem.hookMetaMethod
+local getNamecallMethod = rem.getNamecallMethod
+local newCClosure = rem.newCClosure
+local hookFunction = rem.hookFunction
+local getCallingScript = rem.getCallingScript
+local getInfo = rem.getInfo
 
-if RemoteSpy then
-    return RemoteSpy
-end
-
-RemoteSpy = {}
+local RemoteSpy = {}
 local Remote = import("constructors/Remote")
 local Signal = import("constructors/Signal")
-
-loadedModules.RemoteSpy = RemoteSpy
 
 local requiredMethods = {
     ["checkCaller"] = true,
