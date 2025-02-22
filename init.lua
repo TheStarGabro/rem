@@ -234,7 +234,7 @@ rem.sha = sha
 
 rem.janitor = import("constructors/Janitor").new()
 
-useMethods(import("methods/string"))
-useMethods(import("methods/table"))
-useMethods(import("methods/userdata"))
-useMethods(import("methods/environment"))
+--useMethods(import("methods/string"))
+--useMethods(import("methods/table"))
+--useMethods(import("methods/userdata"))
+--useMethods(import("methods/environment"))
