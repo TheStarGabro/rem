@@ -207,7 +207,7 @@ if sha ~= rem.sha then
     table.clear(rem.import)
 end
 
-function rem.import(asset)
+local import function(asset)
     if importCache[asset] then
         return unpack(importCache[asset])
     end
@@ -226,6 +226,7 @@ function rem.import(asset)
     importCache[asset] = assets
     return unpack(assets)
 end
+rem.import = import
 
 rem.sha = sha
 
