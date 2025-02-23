@@ -1,7 +1,10 @@
 --loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/main.lua"))()
 
-print(loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/init.lua")))
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/init.lua"))
 
+print("Initialized")
+
+local import = rem.import
 local print = import("modules/Output").print
 
 local RemoteSpy = import("modules/RemoteSpy")
