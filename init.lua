@@ -15,7 +15,6 @@ local importCache = {}
 
 if rem.active then
     rem.janitor:Clean()
-    return
 end
 
 rem.active = true
@@ -207,7 +206,7 @@ if sha ~= rem.sha then
     table.clear(rem.import)
 end
 
-local import function(asset)
+local import = function(asset)
     if importCache[asset] then
         return unpack(importCache[asset])
     end
