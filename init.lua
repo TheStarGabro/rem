@@ -3,8 +3,6 @@ local environment = assert(getgenv, "<OH> ~ Your exploit is not supported")()
 local r = environment.rem or {}
 environment.rem = r
 
-print("a")
-print(rem)
 local rem = environment.rem
 
 if oh then
@@ -20,8 +18,6 @@ local importCache = {}
 if rem.active then
     rem.janitor:Clean()
 end
-
-rem.active = true
 
 --###
 
@@ -207,7 +203,9 @@ useMethods(globalMethods)
 local sha = game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://api.github.com/repos/" .. "TheStarGabro" .. "/".."rem".."/branches/".."main")).commit.sha
 
 if sha ~= rem.sha then
-    table.clear(rem.import)
+    if rem.active then
+        table.clear(rem.importCache)
+    end
 end
 
 local import = function(asset)
@@ -230,12 +228,12 @@ local import = function(asset)
     return unpack(assets)
 end
 rem.import = import
-
 rem.sha = sha
 
 --# Post import
 
 rem.janitor = import("constructors/Janitor").new()
+rem.active = true
 
 --useMethods(import("methods/string"))
 --useMethods(import("methods/table"))
