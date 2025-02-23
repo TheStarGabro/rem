@@ -339,7 +339,17 @@ local function add(...)
 		if typeof(v) == "table" then
 			output:Add(v)
 		else
-			table.insert(added.Texts,output:Text(tostring(v)))
+			local text = tostring(v)
+			local lines = text:split("\n")
+			local count = #lines
+			
+			for i,l in lines do
+				table.insert(added.Texts,output:Text())
+				
+				if i ~= count then
+					output:Separate()
+				end
+			end
 		end
 	end
 	
@@ -348,15 +358,18 @@ end
 
 janitor:Add(
     game:GetService("LogService").MessageOut:Connect(function(msg,msgtype)
-        local color =
-            msgtype == Enum.MessageType.MessageError and Color3.fromRGB(255,0,0) or
-            msgtype == Enum.MessageType.MessageInfo and Color3.fromRGB(128, 215, 255) or
-            msgtype == Enum.MessageType.MessageWarning and Color3.fromRGB(255, 115, 21)
-        
-        if not color then return end
-        
-        local added = add(msg)
-        added.Texts[1].Instance.TextColor3 = color or Color3.new(1,1,1)
+		local color =
+			msgtype == Enum.MessageType.MessageError and Color3.fromRGB(255,0,0) or
+			msgtype == Enum.MessageType.MessageInfo and Color3.fromRGB(128, 215, 255) or
+			msgtype == Enum.MessageType.MessageWarning and Color3.fromRGB(255, 115, 21)
+		
+		if not color then return end
+		
+		local added = add(msg)
+		
+		for _,t in added.Texts do
+			t.Instance.TextColor3 = color or Color3.new(1,1,1)
+		end
     end)
 )
 
