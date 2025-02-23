@@ -33,6 +33,24 @@ end)
 local grind_button = Buttons:Create():Text("Currency"):Image("rbxthumb://type=BadgeIcon&id=151504819763412&w=150&h=150"):Popup("Always grind")
 grind_button.Frame.MouseButton1Click:Connect(function()
     grind_button:Toggle()
+
+    if grind_button.task then
+        task.cancel(grind_button.task)
+    end
+
+    if grind_button.state then
+        local task = task.spawn(function()
+            while task.wait(0.1) do
+                game.ReplicatedStorage.Knit.Services.ProgressService.RE.ClientLogProgress:FireServer(
+                    "RailGrindPoints",
+                    4,
+                    {ZoneName = Zone}
+                )
+            end
+        end)
+        grind_button.task = task
+        janitor:Add(task)
+    end
 end)
 
 -- Set default zone
@@ -71,7 +89,7 @@ janitor:Add(
     OnEventMulti(game.ReplicatedStorage.Knit.Services.ProgressService.RE.ClientLogProgress):Connect(function(info)
         local args = info.args
 
-        if grind_button.state and args[1] == "RailGrindPoints" then
+        if args[1] == "RailGrindPoints" then
             for i,v in args[3] do
                 print(i,v)
             end
