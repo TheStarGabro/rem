@@ -5,6 +5,7 @@ local newCClosure = rem.newCClosure
 local hookFunction = rem.hookFunction
 local getCallingScript = rem.getCallingScript
 local getInfo = rem.getInfo
+local oh = rem.oh
 
 local RemoteSpy = {}
 local Remote = import("constructors/Remote")
