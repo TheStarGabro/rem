@@ -5,6 +5,7 @@ loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem
 print("Initialized")
 
 local import = rem.import
+local janitor = rem.janitor
 local print = import("modules/Output").print
 
 local RemoteSpy = import("modules/RemoteSpy")
