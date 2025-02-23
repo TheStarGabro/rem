@@ -392,6 +392,7 @@ end
 
 janitor:Add(
     game:GetService("UserInputService").InputBegan:Connect(function(input)
+		print(input.KeyCode)
         if input.KeyCode ~= Enum.KeyCode.Insert then return end
         
         ToggleUI()
