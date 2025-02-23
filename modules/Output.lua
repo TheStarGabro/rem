@@ -393,11 +393,11 @@ end
 janitor:Add(
     game:GetService("UserInputService").InputBegan:Connect(function(input)
 		print(input.KeyCode)
-        if input.KeyCode ~= Enum.KeyCode.LeftAlt then return end
-
-		print("toggle")
+        if input.KeyCode == Enum.KeyCode.LeftAlt then
+			print("toggle")
         
-        ToggleUI()
+			ToggleUI()
+		end
     end)
 )
 
