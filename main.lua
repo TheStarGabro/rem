@@ -67,10 +67,10 @@ hydroxide_button.Frame.MouseButton1Click:Connect(function()
             loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/Hydroxide/init.lua"))()
             loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/Hydroxide/ui/main.lua"))()
         end
-
-        local ui = hydroxideImport("ui/main")
-        ui.Enabled = hydroxide_button.state
     end
+
+    local ui = hydroxideImport("ui/main")
+    ui.Enabled = hydroxide_button.state
 end)
 
 -- Set default zone
