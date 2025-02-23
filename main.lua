@@ -4,6 +4,7 @@ loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem
 
 print("Initialized")
 
+local hydroxideImport = import
 local import = rem.import
 local janitor = rem.janitor
 local print = import("modules/Output").print
@@ -56,6 +57,22 @@ end)
 local wisp_button = Buttons:Create():Text("Wisp"):Image("rbxthumb://type=BadgeIcon&id=168551842&w=150&h=150"):Popup("+5 Wisp"):Toggle(true)
 wisp_button.Frame.MouseButton1Click:Connect(function()
     game.ReplicatedStorage.Knit.Services.MapStateService.RE.OnStateAction:FireServer("AddEventCurrency","Whisper",5,true)
+end)
+
+local hydroxide_button = Buttons:Create():Text("Hydroxide"):Image(""):Popup("Toggle Hydroxide")
+hydroxide_button.Frame.MouseButton1Click:Connect(function()
+    hydroxide_button:Toggle()
+
+    if hydroxide_button.state then
+        if not hydroxide_button.active then
+            hydroxide_button.active = true
+            loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/Hydroixe/init.lua"))()
+            loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/Hydroixe/ui/main.lua"))()
+        end
+
+        local ui = hydroxideImport("ui/main")
+        ui.Enabled = hydroxide_button.state
+    end
 end)
 
 -- Set default zone
