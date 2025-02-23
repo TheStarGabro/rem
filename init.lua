@@ -203,9 +203,7 @@ useMethods(globalMethods)
 local sha = game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://api.github.com/repos/" .. "TheStarGabro" .. "/".."rem".."/branches/".."main")).commit.sha
 
 if sha ~= rem.sha then
-    if rem.active then
-        table.clear(rem.importCache)
-    end
+    
 end
 
 local import = function(asset)
