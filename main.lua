@@ -91,7 +91,7 @@ janitor:Add(
 
         if args[1] == "RailGrindPoints" then
             for i,v in args[3] do
-                print(i,v)
+                --print(i,v)
             end
         end
     end)

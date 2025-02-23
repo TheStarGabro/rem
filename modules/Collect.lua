@@ -46,6 +46,7 @@ function Collect:Start()
 
     Collect:Registers()
 
+    print"a"
     collectThread = task.spawn(function()
         Collect:CollectAll()
         while task.wait(DELAY) do
@@ -53,6 +54,7 @@ function Collect:Start()
         end
     end)
     
+    print"b"
     janitor:Add(collectThread)
 end
 
