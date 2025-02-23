@@ -11,10 +11,36 @@ local print = import("modules/Output").print
 local RemoteSpy = import("modules/RemoteSpy")
 local Signal = import("constructors/Signal")
 local Collect = import("modules/Collect")
+local Buttons = import("modules/Buttons")
 
-local OnEventMulti = Signal.newChanged()
+----------------------------------------------------------------
 
 local Zone
+local OnEventMulti = Signal.newChanged()
+
+-- Create buttons
+local currency_button = Buttons:Create():Text("Currency"):Image("rbxthumb://type=BadgeIcon&id=1701184002070847&w=150&h=150"):Popup("Automatically collect currency/destructible/entity")
+currency_button.Frame.MouseButton1Click:Connect(function()
+    currency_button:Toggle()
+    
+    if currency_button.state then
+        Collect:Start()
+    else
+        Collect:Stop() 
+    end
+end)
+
+local grind_button = Buttons:Create():Text("Currency"):Image("rbxthumb://type=BadgeIcon&id=151504819763412&w=150&h=150"):Popup("Always grind")
+grind_button.Frame.MouseButton1Click:Connect(function()
+    grind_button:Toggle()
+end)
+
+-- Set default zone
+for i,v in game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RF.GetRegistry:InvokeServer() do
+    Zone = v.ZoneName
+end
+
+----------------------------------------------------------------
 
 janitor:Add(
     RemoteSpy.Signal:Connect(function(instance,info)
@@ -23,7 +49,9 @@ janitor:Add(
 
     OnEventMulti(game.ReplicatedStorage.Knit.Services.ZoneService.RE.ZoneLoaded):Connect(function(info)
         Zone = info.args[1]
-        --Collect:Start()
+        if currency_button.state then
+            Collect:Start()
+        end
     end),
 
     OnEventMulti(game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RE.PickupWorldCurrency):Connect(function(info)
@@ -43,18 +71,13 @@ janitor:Add(
     OnEventMulti(game.ReplicatedStorage.Knit.Services.ProgressService.RE.ClientLogProgress):Connect(function(info)
         local args = info.args
 
-        if args[1] == "RailGrindPoints" then
+        if grind_button.state and args[1] == "RailGrindPoints" then
             for i,v in args[3] do
                 print(i,v)
             end
         end
     end)
 )
-
--- Set default zone
-for i,v in game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RF.GetRegistry:InvokeServer() do
-    Zone = v.ZoneName
-end
 
 --[[
 janitor:Add(task.spawn(function()

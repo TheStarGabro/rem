@@ -80,6 +80,7 @@ function ButtonMeta:Toggle(state)
 		self.imagelabel.ImageColor3 = Color3.new(0.427451, 0.427451, 0.427451)
 	end
 	
+    return self
 end
 
 function ButtonMeta:Popup(text)
@@ -143,7 +144,7 @@ function Buttons:Create()
 		end)
 	)
 
-	button:Toggle(true)
+	button:Toggle(false)
 	
 	return button
 end
