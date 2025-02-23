@@ -1,6 +1,7 @@
 local LINES = 25
 local FONT = Enum.Font.Arimo
 local HOTBAR_HEIGHT = 0.05
+local TOGGLE_KEY = Enum.KeyCode.Backquote
 
 local TextService = game:GetService("TextService")
 local janitor = rem.janitor
@@ -390,16 +391,11 @@ local function ToggleUI()
 	screenUI.Enabled = not screenUI.Enabled
 end
 
-
-local req = Enum.KeyCode.LeftAlt
 janitor:Add(
     game:GetService("UserInputService").InputBegan:Connect(function(input)
-		print(input.KeyCode,req)
-        if input.KeyCode == req then
-			print("toggle")
-        
-			ToggleUI()
-		end
+        if input.KeyCode ~= TOGGLE_KEY then return end
+		
+		ToggleUI()
     end)
 )
 
