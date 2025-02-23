@@ -1,7 +1,10 @@
 local environment = assert(getgenv, "<OH> ~ Your exploit is not supported")()
 
-local rem = environment.rem or {}
-environment.rem = rem
+local r = environment.rem or {}
+environment.rem = r
+
+print(rem)
+local rem = environment.rem
 
 if oh then
     oh.Exit()
