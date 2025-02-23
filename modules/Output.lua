@@ -390,10 +390,12 @@ local function ToggleUI()
 	screenUI.Enabled = not screenUI.Enabled
 end
 
+
+local req = Enum.KeyCode.LeftAlt
 janitor:Add(
     game:GetService("UserInputService").InputBegan:Connect(function(input)
-		print(input.KeyCode)
-        if input.KeyCode == Enum.KeyCode.LeftAlt then
+		print(input.KeyCode,req)
+        if input.KeyCode == req then
 			print("toggle")
         
 			ToggleUI()
