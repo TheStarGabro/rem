@@ -3,6 +3,7 @@ local environment = assert(getgenv, "<OH> ~ Your exploit is not supported")()
 local r = environment.rem or {}
 environment.rem = r
 
+print("a")
 print(rem)
 local rem = environment.rem
 
