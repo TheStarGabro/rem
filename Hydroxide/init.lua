@@ -186,12 +186,13 @@ end
 useMethods(globalMethods)
 
 local HttpService = game:GetService("HttpService")
+local sha = game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://api.github.com/repos/" .. "TheStarGabro" .. "/".."rem".."/branches/".."main")).commit.sha
 
 if readFile and writeFile then
     local hasFolderFunctions = (isFolder and makeFolder) ~= nil
     local ran, result = pcall(readFile, "__oh_version.txt")
 
-    if not ran then
+    if not ran or sha ~= result then
         if hasFolderFunctions then
             local function createFolder(path)
                 if not isFolder(path) then
@@ -250,8 +251,8 @@ if readFile and writeFile then
             return unpack(assets)
         end
 
-        writeFile("__oh_version.txt", releaseInfo.tag_name)
-    elseif ran then
+        writeFile("__oh_version.txt", sha)
+    elseif ran and sha == result then
         function environment.import(asset)
             if importCache[asset] then
                 return unpack(importCache[asset])
