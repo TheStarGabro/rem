@@ -2,7 +2,10 @@ local Collect = {}
 
 local DELAY = 10
 
+
+
 local RunService = game:GetService("RunService")
+local janitor = rem.janitor
 
 local CurrencyGetRegistry = game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RF.GetRegistry
 local DestructibleGetRegistry = game.ReplicatedStorage.Knit.Services.DestructibleService.RF.GetRegistry

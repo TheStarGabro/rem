@@ -30,7 +30,7 @@ currency_button.Frame.MouseButton1Click:Connect(function()
     end
 end)
 
-local grind_button = Buttons:Create():Text("Currency"):Image("rbxthumb://type=BadgeIcon&id=151504819763412&w=150&h=150"):Popup("Always grind")
+local grind_button = Buttons:Create():Text("Grind"):Image("rbxthumb://type=BadgeIcon&id=151504819763412&w=150&h=150"):Popup("Always grind")
 grind_button.Frame.MouseButton1Click:Connect(function()
     grind_button:Toggle()
 
