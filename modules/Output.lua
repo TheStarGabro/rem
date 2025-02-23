@@ -1,3 +1,4 @@
+if game:GetService("RunService"):IsStudio() then rem = setmetatable({},{__index = function(t) return t end,__call = function(t) return t end}) end
 local LINES = 25
 local FONT = Enum.Font.Arimo
 local HOTBAR_HEIGHT = 0.05
@@ -58,7 +59,7 @@ list.Parent = mainFrame
 --
 
 local popup = Instance.new("Frame")
-popup.BackgroundTransparency = 0
+popup.BackgroundTransparency = 1
 popup.BorderSizePixel = 0
 popup.BackgroundColor3 = Color3.new(.227451, .227451, .227451)
 popup.AnchorPoint = Vector2.new(.5,0)
