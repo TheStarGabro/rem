@@ -1,6 +1,7 @@
 if game:GetService("RunService"):IsStudio() then rem = setmetatable({},{__index = function(t) return t end,__call = function(t) return t end}) end
 local FONT = Enum.Font.Arimo
 local POPUP_INCREASE = 3
+local TOGGLE_KEY = Enum.KeyCode.Backquote
 
 local TextService = game:GetService("TextService")
 local janitor = rem.janitor
@@ -148,5 +149,27 @@ function Buttons:Create()
 	
 	return button
 end
+
+----------------------------------------------------------------
+
+local function ToggleUI()
+	screenUI.Enabled = not screenUI.Enabled
+end
+
+janitor:Add(
+	game:GetService("UserInputService").InputBegan:Connect(function(input)
+		if input.KeyCode ~= TOGGLE_KEY then return end
+
+		ToggleUI()
+	end)
+)
+
+janitor:Add(function()
+	screenUI:Destroy()
+end)
+
+ToggleUI()
+
+----------------------------------------------------------------
 
 return Buttons
