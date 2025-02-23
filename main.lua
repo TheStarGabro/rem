@@ -1,8 +1,6 @@
 --loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/main.lua"))()
 
-loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/init.lua"))()
-
-print("Initialized")
+print("Main")
 
 local hydroxideImport = import
 local import = rem.import
