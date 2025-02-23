@@ -67,8 +67,8 @@ hydroxide_button.Frame.MouseButton1Click:Connect(function()
     if hydroxide_button.state then
         if not hydroxide_button.active then
             hydroxide_button.active = true
-            loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/Hydroixe/init.lua"))()
-            loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/Hydroixe/ui/main.lua"))()
+            loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/Hydroxide/init.lua"))()
+            loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/Hydroxide/ui/main.lua"))()
         end
 
         local ui = hydroxideImport("ui/main")
