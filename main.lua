@@ -53,6 +53,11 @@ grind_button.Frame.MouseButton1Click:Connect(function()
     end
 end)
 
+local wisp_button = Buttons:Create():Text("Wisp"):Image("rbxthumb://type=BadgeIcon&id=168551842&w=150&h=150"):Popup("+5 Wisp"):Toggle(true)
+wisp_button.Frame.MouseButton1Click:Connect(function()
+    game.ReplicatedStorage.Knit.Services.MapStateService.RE.OnStateAction:FireServer("AddEventCurrency","Whisper",5,true)
+end)
+
 -- Set default zone
 for i,v in game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RF.GetRegistry:InvokeServer() do
     Zone = v.ZoneName
