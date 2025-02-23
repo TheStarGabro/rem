@@ -2,8 +2,6 @@ local Collect = {}
 
 local DELAY = 10
 
-
-
 local RunService = game:GetService("RunService")
 local janitor = rem.janitor
 
