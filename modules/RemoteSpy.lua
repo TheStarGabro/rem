@@ -51,10 +51,6 @@ local remoteSignal = Signal.new()
 local eventSet = true
 
 local function connectEvent(callback)
-    if not eventSet then
-        eventSet = true
-    end
-
     return remoteSignal:Connect(callback)
 end
 
