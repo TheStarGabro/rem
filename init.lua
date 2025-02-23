@@ -232,8 +232,11 @@ rem.sha = sha
 
 --# Post import
 
-rem.janitor = import("constructors/Janitor").new()
-rem.active = true
+if not rem.active then
+    rem.janitor = import("constructors/Janitor").new()
+    rem.active = true
+end
+
 
 --useMethods(import("methods/string"))
 --useMethods(import("methods/table"))
