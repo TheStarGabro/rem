@@ -261,7 +261,7 @@ if readFile and writeFile then
             if asset:find("rbxassetid://") then
                 assets = { game:GetObjects(asset)[1] }
             elseif web then
-                local file = (hasFolderFunctions and "hydroxide/user/" .. user .. '/Hydroxide/' .. asset .. ".lua") or ("hydroxide-" .. user .. '-' .. asset:gsub('/', '-') .. ".lua")
+                local file = (hasFolderFunctions and "hydroxide/user/" .. user .. '/' .. asset .. ".lua") or ("hydroxide-" .. user .. '-' .. asset:gsub('/', '-') .. ".lua")
                 local ran, result = pcall(readFile, file)
                 local content
 
@@ -274,7 +274,7 @@ if readFile and writeFile then
 
                 assets = { loadstring(content, asset .. '.lua')() }
             else
-                assets = { loadstring(readFile("hydroxide/Hydroxide/" .. asset .. ".lua"), asset .. '.lua')() }
+                assets = { loadstring(readFile("hydroxide/" .. asset .. ".lua"), asset .. '.lua')() }
             end
 
             importCache[asset] = assets
