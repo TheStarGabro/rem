@@ -93,10 +93,10 @@ local UpdateY = {}
 
 local function AddUpdateY(instance,property,func)
 	local f = func
-	
+
 	if not f then
 		local p = instance[property]
-		
+
 		if typeof(p) == "number" then
 			f = function()
 				instance[property] = mainFrame.AbsoluteSize.Y/LINES
@@ -108,9 +108,9 @@ local function AddUpdateY(instance,property,func)
 			end
 		end
 	end
-	
+
 	f()
-	
+
 	local uy = UpdateY[instance]
 	if not uy then
 		uy = {}
@@ -120,13 +120,13 @@ local function AddUpdateY(instance,property,func)
 end
 
 janitor:Add(
-    mainFrame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-        for instance,info in UpdateY do
-            for _,f in info do
-                f()
-            end
-        end
-    end)
+	mainFrame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+		for instance,info in UpdateY do
+			for _,f in info do
+				f()
+			end
+		end
+	end)
 )
 
 local function Output(frame)
@@ -135,24 +135,24 @@ local function Output(frame)
 	line.Size = UDim2.fromScale(1,1/LINES)
 	line.AutomaticSize = Enum.AutomaticSize.Y
 	line.Parent = mainFrame
-	
+
 	table.insert(lines,line)
 
 	local linelist = Instance.new("UIListLayout")
 	linelist.Parent = line
-	
+
 	local output = setmetatable({
 		Frame = line
 	},OutputMeta)
-	
+
 	output:Separate()
-	
+
 	return output
 end
 
 function OutputMeta:Text(text,info)
 	info = info or {}
-	
+
 	local label:TextLabel = Instance.new(info.IsButton and "TextButton" or "TextLabel")
 	label.Text = text
 	label.BackgroundTransparency = 1
@@ -163,33 +163,33 @@ function OutputMeta:Text(text,info)
 	label.LayoutOrder = #self.Row:GetChildren()+1
 	label.TextColor3 = info.Color or Color3.new(1,1,1)
 	label.Size = UDim2.new(0,1,1,0)
-	
+
 	if info.Popup then
-        janitor:Add(
-            label.MouseEnter:Connect(function()
-                popuptext.Text = info.Popup
-                popup.Parent = label
-            end)
-        )
-		
-        janitor:Add(
-            label.MouseLeave:Connect(function()
-                popup.Parent = nil
-            end)
-        )
+		janitor:Add(
+			label.MouseEnter:Connect(function()
+				popuptext.Text = info.Popup
+				popup.Parent = label
+			end)
+		)
+
+		janitor:Add(
+			label.MouseLeave:Connect(function()
+				popup.Parent = nil
+			end)
+		)
 	end
-	
+
 	AddUpdateY(label,"Size")
 	AddUpdateY(label,"TextSize")
 	AddUpdateY(label,nil,function()
 		local size = TextService:GetTextSize(text,label.TextSize,FONT,Vector2.new(math.huge,math.huge))
-		
+
 		local ls = label.Size
 		label.Size = UDim2.new(0,size.X,ls.Y.Scale,ls.Y.Offset)
 	end)
 
 	label.Parent = self.Row
-	
+
 	return {
 		Instance = label
 	}
@@ -200,7 +200,7 @@ function OutputMeta:Date(text:string?)
 	local text = self:Text(text or `{date.Hour}:{date.Minute}:{date.Second}.{date.Millisecond} `,
 		{Color = Color3.new(.72549, .72549, .72549)}
 	)
-	
+
 	return text
 end
 
@@ -210,22 +210,22 @@ function OutputMeta:Separate()
 	row.Parent = self.Frame
 
 	self.Row = row
-	
+
 	local list = Instance.new("UIListLayout")
 	list.FillDirection = Enum.FillDirection.Horizontal
 	list.SortOrder = Enum.SortOrder.LayoutOrder
 	list.Parent = row
-	
+
 	return {Instance = row}
 end
 
 function OutputMeta:Push(depth)
 	local t = ""
-	
+
 	for i = 1,depth do
 		t..="    "
 	end
-	
+
 	self:Text(t)
 end
 
@@ -281,21 +281,21 @@ local AddCases = {
 			end
 		end
 
-        janitor:Add(
-            button.MouseButton1Click:Connect(toggle)
-        )
+		janitor:Add(
+			button.MouseButton1Click:Connect(toggle)
+		)
 
 		toggle()
 	end,
-	
+
 	string = function(self,add,depth)
 		self:Text(`"{tostring(add)}"`)
 	end,
-	
+
 	Instance = function(self,add)
 		self:Text(tostring(add),{Popup = add:GetFullName()})
 	end,
-	
+
 	default = function(self,add,depth)
 		self:Text(tostring(add))
 	end,
@@ -307,9 +307,9 @@ function OutputMeta:Add(add,depth)
 	else
 		depth = 0
 	end
-	
+
 	local _type = typeof(add)
-	
+
 	if AddCases[_type] then
 		AddCases[_type](self,add,depth)
 	else
@@ -321,11 +321,11 @@ local function add(...)
 	local args = {...}
 
 	local output = Output()
-	
+
 	local added = {
 		Texts = {}
 	}
-	
+
 	for i,v in args do
 		if i ~= 1 then
 			output:Separate()
@@ -333,44 +333,44 @@ local function add(...)
 		else
 			output:Date()
 		end
-		
+
 		output:Text(" ")
-		
+
 		if typeof(v) == "table" then
 			output:Add(v)
 		else
 			local text = tostring(v)
 			local lines = text:split("\n")
 			local count = #lines
-			
+
 			for i,l in lines do
-				table.insert(added.Texts,output:Text())
-				
+				table.insert(added.Texts,output:Text(l))
+
 				if i ~= count then
 					output:Separate()
 				end
 			end
 		end
 	end
-	
+
 	return added
 end
 
 janitor:Add(
-    game:GetService("LogService").MessageOut:Connect(function(msg,msgtype)
+	game:GetService("LogService").MessageOut:Connect(function(msg,msgtype)
 		local color =
 			msgtype == Enum.MessageType.MessageError and Color3.fromRGB(255,0,0) or
 			msgtype == Enum.MessageType.MessageInfo and Color3.fromRGB(128, 215, 255) or
 			msgtype == Enum.MessageType.MessageWarning and Color3.fromRGB(255, 115, 21)
-		
+
 		if not color then return end
-		
+
 		local added = add(msg)
-		
+
 		for _,t in added.Texts do
 			t.Instance.TextColor3 = color or Color3.new(1,1,1)
 		end
-    end)
+	end)
 )
 
 --###
@@ -381,21 +381,21 @@ local function HotbarButton(icon)
 	button.BackgroundTransparency = 1
 	button.Size = UDim2.fromScale(1,1)
 	button.Parent = hotbar
-	
+
 	local aspectratio = Instance.new("UIAspectRatioConstraint")
 	aspectratio.Parent = button
 	aspectratio.DominantAxis = Enum.DominantAxis.Height
-	
+
 	return button
 end
 
 local clean = HotbarButton()
 janitor:Add(
-    clean.MouseButton1Click:Connect(function()
-        for _,line in lines do
-            line:Destroy()
-        end
-    end)
+	clean.MouseButton1Click:Connect(function()
+		for _,line in lines do
+			line:Destroy()
+		end
+	end)
 )
 
 --##
@@ -405,15 +405,15 @@ local function ToggleUI()
 end
 
 janitor:Add(
-    game:GetService("UserInputService").InputBegan:Connect(function(input)
-        if input.KeyCode ~= TOGGLE_KEY then return end
-		
+	game:GetService("UserInputService").InputBegan:Connect(function(input)
+		if input.KeyCode ~= TOGGLE_KEY then return end
+
 		ToggleUI()
-    end)
+	end)
 )
 
 janitor:Add(function()
-    screenUI:Destroy()
+	screenUI:Destroy()
 end)
 
 ToggleUI()
