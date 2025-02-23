@@ -15,9 +15,9 @@ local ui = Instance.new("Frame")
 ui.BackgroundColor3 = Color3.new(.262745, .262745, .262745)
 ui.BorderSizePixel = 0
 ui.BackgroundTransparency = .1
-ui.AnchorPoint = Vector2.new(.5,.5)
-ui.Position = UDim2.fromScale(.5,.5)
-ui.Size = UDim2.fromScale(.75,.9)
+ui.AnchorPoint = Vector2.new(0,.5)
+ui.Position = UDim2.fromScale(0.1,.5)
+ui.Size = UDim2.fromScale(.35,.9)
 ui.Parent = screenUI
 
 local hotbar = Instance.new("Frame")
