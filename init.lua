@@ -231,8 +231,10 @@ rem.sha = sha
 --# Post import
 
 if not rem.active then
-    rem.janitor = import("constructors/Janitor").new()
     rem.active = true
+
+    rem.janitor = import("constructors/Janitor").new()
+    rem.print = import("modules/Output").print
 end
 
 
