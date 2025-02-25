@@ -146,6 +146,16 @@ janitor:Add(
     end)
 )
 
+local flash = Instance.new("TextLabel")
+flash.Text = "MAIN LOADED"
+flash.TextScaled = true
+flash.TextColor3 = Color3.new(1,1,1)
+flash.Size = UDim2.fromScale(1,1)
+flash.Parent = game.CoreGui
+task.wait(0.2)
+flash:Destroy()
+
+print("Main Loaded")
 --[[
 janitor:Add(task.spawn(function()
     while task.wait(0.1) do
