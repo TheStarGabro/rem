@@ -146,7 +146,7 @@ janitor:Add(
     end)
 )
 
-local flashscreen = instance.new("ScreenGui")
+local flashscreen = Instance.new("ScreenGui")
 flashscreen.Parent = game.Players.LocalPlayer.PlayerGui
 
 local flash = Instance.new("TextLabel")
