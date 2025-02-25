@@ -8,7 +8,7 @@ local CALLS_DISPLAYED = 20
 local janitor = rem.janitor
 local import = rem.import
 local TextService = game:GetService("TextService")
-local Menu if game:GetService("RunService"):IsStudio() then Menu = require(script.Parent.Menu) else Menu = import("Modules/Menu") end
+local Menu if game:GetService("RunService"):IsStudio() then Menu = require(script.Parent.Menu) else Menu = rem.import("Modules/Menu") end
 
 local remote = Menu:Add("Remote")
 local menu = remote.Menu
