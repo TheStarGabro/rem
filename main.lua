@@ -95,7 +95,7 @@ run_button.Frame.MouseButton1Click:Connect(effectButton(run_button,function()
     end
 end))
 
-local wisp_button = Buttons:Create():Text("Wisp"):Image("rbxassetid://168551842"):Popup("+5 Wisp"):Toggle(true)
+local wisp_button = Buttons:Create():Text("Wisp"):Image("rbxassetid://168551841"):Popup("+5 Wisp"):Toggle(true)
 wisp_button.Frame.MouseButton1Click:Connect(function()
     game.ReplicatedStorage.Knit.Services.MapStateService.RE.OnStateAction:FireServer("AddEventCurrency","Whisper",5,true)
 end)
