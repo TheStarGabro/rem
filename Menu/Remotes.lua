@@ -341,12 +341,11 @@ function Mote.new(remote)
 
 	local list = Instance.new("UIListLayout")
 	list.FillDirection = Enum.FillDirection.Horizontal
-	list.HorizontalFlex = Enum.UIFlexAlignment.SpaceEvenly
 	list.Parent = button
 
 	local icon = Instance.new("ImageLabel")
 	icon.BackgroundTransparency = 1
-	icon.Size = UDim2.fromScale(1,1)
+	icon.Size = UDim2.fromScale(0.1,1)
 	icon.Image = remote:IsA("RemoteEvent") and "rbxassetid://4229806545" or
 		remote:IsA("RemoteFunction") and "rbxassetid://4229810474" or
 		remote:IsA("BindableEvent") and "rbxassetid://4229809371" or
@@ -363,7 +362,7 @@ function Mote.new(remote)
 	name.TextColor3 = Color3.new(1,1,1)
 	name.Font = FONT
 	name.BackgroundTransparency = 1
-	name.Size = UDim2.fromScale(0.5,1)
+	name.Size = UDim2.fromScale(0.8,1)
 	name.Parent = button
 
 	local count = Instance.new("TextLabel")
