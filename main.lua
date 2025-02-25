@@ -10,8 +10,11 @@ local Signal = import("constructors/Signal")
 local Collect = import("modules/Collect")
 local Buttons = import("modules/Buttons")
 
+print("a")
 import("Menu/Output")
+print("b")
 import("Menu/Remotes")
+print("b")
 
 ----------------------------------------------------------------
 
