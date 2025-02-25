@@ -13,6 +13,7 @@ local web = true
 local user = "TheStarGabro" -- change if you're using a fork
 local rep = "rem"
 local branch = "main"
+local cache = {}
 local importCache = {}
 
 if rem.active then
@@ -114,7 +115,7 @@ rem.hasMethods = hasMethods
 rem.oh = {
     Events = {},
     Hooks = {},
-    Cache = importCache,
+    Cache = cache,
     Methods = globalMethods,
     Constants = {
         Types = {
