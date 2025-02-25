@@ -73,9 +73,19 @@ function Signal:Wait()
 end
 
 function Signal:Fire(...)
+	local run = self.run or spawn
 	for _,f in self._connections do
-		spawn(f,...)
+		run(f,...)
 	end
+end
+
+function Signal:Yieldable(state:bool)
+	if state == nil then
+		state = not self.yieldeable
+	end
+
+	self.yieldable = state
+	self.run = state and function(f,...) f(...) end or nil
 end
 
 function Signal:DisconnectAll()

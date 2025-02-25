@@ -45,21 +45,27 @@ local methodHooks = {
     BindableFunction = Instance.new("BindableFunction").Invoke
 }
 
+local functionsIndexed = {
+    RemoteFunction = true,
+    BindableFunction = true
+}
+
 local currentRemotes = {}
 
-local remoteSignal = Signal.new()
+local remoteSignal = Signal.new():Yieldable()
+local functionSignal = Signal.new()
 local eventSet = true
 
 local function connectEvent(callback)
     return remoteSignal:Connect(callback)
 end
 
-local nmcTrampoline
-nmcTrampoline = hookMetaMethod(game, "__namecall", function(...)
+local originalMethod
+originalMethod = hookMetaMethod(game, "__namecall", function(...)
     local instance = ...
     
     if typeof(instance) ~= "Instance" then
-        return nmcTrampoline(...)
+        return originalMethod(...)
     end
 
     local method = getNamecallMethod()
@@ -93,6 +99,24 @@ nmcTrampoline = hookMetaMethod(game, "__namecall", function(...)
 
             remote.IncrementCalls(remote, call)
             remoteSignal:Fire(instance, call)
+
+            local first_arg = ...
+            local new_args = {first_arg}
+            for _,v in ipairs(call.args) do
+                table.insert(new_args,v)
+            end
+
+            if functionsIndexed[instance.ClassName] then
+                local received = {originalMethod(unpack(new_args))}
+    
+                functionSignal:Fire(instance,{
+                    args = received
+                })
+    
+                return unpack(received)
+            end
+    
+            return originalMethod(unpack(new_args))
         end
 
         if remoteBlocked or argsBlocked then
@@ -100,7 +124,7 @@ nmcTrampoline = hookMetaMethod(game, "__namecall", function(...)
         end
     end
 
-    return nmcTrampoline(...)
+    return originalMethod(...)
 end)
 
 -- vuln fix
@@ -136,6 +160,10 @@ for _name, hook in pairs(methodHooks) do
 
             local remoteIgnored = remote.Ignored 
             local argsIgnored = remote:AreArgsIgnored(vargs)
+
+            if remote.Blocked or remote:AreArgsBlocked(vargs) then
+                return
+            end
             
             if eventSet and (not remoteIgnored and not argsIgnored) then
                 local call = {
@@ -146,13 +174,27 @@ for _name, hook in pairs(methodHooks) do
     
                 remote:IncrementCalls(call)
                 remoteSignal:Fire(instance, call)
-            end
 
-            if remote.Blocked or remote:AreArgsBlocked(vargs) then
-                return
+                local first_arg = ...
+                local new_args = {first_arg}
+                for _,v in ipairs(call.args) do
+                    table.insert(new_args,v)
+                end
+
+                if functionsIndexed[instance.ClassName] then
+                    local received = {originalMethod(unpack(new_args))}
+        
+                    functionSignal:Fire(instance,{
+                        args = received
+                    })
+        
+                    return unpack(received)
+                end
+        
+                return originalMethod(unpack(new_args))
             end
         end
-        
+
         return originalMethod(...)
     end))
 
@@ -165,5 +207,6 @@ RemoteSpy.ConnectEvent = connectEvent
 RemoteSpy.RequiredMethods = requiredMethods
 
 RemoteSpy.Signal = remoteSignal
+RemoteSpy.FunctionSignal = functionSignal
 
 return RemoteSpy
