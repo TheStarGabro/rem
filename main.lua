@@ -147,14 +147,14 @@ janitor:Add(
 )
 
 local flashscreen = instance.new("ScreenGui")
-flashscreen.Parent = game.Players.LocalPlayer.PlayerGui
+flashscreen.Parent = game.CoreGui
 
 local flash = Instance.new("TextLabel")
 flash.Text = "MAIN LOADED"
 flash.TextScaled = true
 flash.TextColor3 = Color3.new(1,1,1)
 flash.Size = UDim2.fromScale(1,1)
-flash.Parent = gflashscreen
+flash.Parent = flashscreen
 task.wait(0.2)
 flashscreen:Destroy()
 
