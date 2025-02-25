@@ -83,7 +83,7 @@ hoverboard_button.Frame.MouseButton1Click:Connect(effectButton(hoverboard_button
     end
 end))
 
-local run_button = Buttons:Create():Text("Run"):Image("rbxthumb://type=BadgeIcon&id=2126202654&w=150&h=150"):Popup("Trick & Boost"):Toggle(true)
+local run_button = Buttons:Create():Text("Run"):Image("rbxthumb://type=BadgeIcon&id=2126202654&w=150&h=150"):Popup("Run"):Toggle(true)
 run_button.Frame.MouseButton1Click:Connect(effectButton(run_button,function()
     while task.wait(0.1) do
         game.ReplicatedStorage.Knit.Services.CharacterService.RE.UpdateCharacterState:FireServer(
@@ -95,7 +95,7 @@ run_button.Frame.MouseButton1Click:Connect(effectButton(run_button,function()
     end
 end))
 
-local wisp_button = Buttons:Create():Text("Wisp"):Image("rbxthumb://type=BadgeIcon&id=168551842&w=150&h=150"):Popup("+5 Wisp"):Toggle(true)
+local wisp_button = Buttons:Create():Text("Wisp"):Image("rbxassetid://168551842"):Popup("+5 Wisp"):Toggle(true)
 wisp_button.Frame.MouseButton1Click:Connect(function()
     game.ReplicatedStorage.Knit.Services.MapStateService.RE.OnStateAction:FireServer("AddEventCurrency","Whisper",5,true)
 end)
