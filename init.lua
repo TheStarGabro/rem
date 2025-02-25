@@ -14,7 +14,6 @@ local user = "TheStarGabro" -- change if you're using a fork
 local rep = "rem"
 local branch = "main"
 local cache = {}
-local importCache = {}
 
 if rem.active then
     rem.janitor:Clean()
@@ -157,8 +156,8 @@ rem.oh = {
             end
         end
 
-        local ui = importCache["rbxassetid://11389137937"]
-        local assets = importCache["rbxassetid://5042114982"]
+        local ui = cache["rbxassetid://11389137937"]
+        local assets = cache["rbxassetid://5042114982"]
 
         if ui then
             unpack(ui):Destroy()
@@ -207,6 +206,7 @@ if sha ~= rem.sha then
     
 end
 
+local importCache = {}
 local import = function(asset)
     if importCache[asset] then
         return unpack(importCache[asset])
