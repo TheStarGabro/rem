@@ -1,7 +1,5 @@
 --loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/main.lua"))()
 
-print("Main")
-
 local hydroxideImport = import
 local import = rem.import
 local janitor = rem.janitor
