@@ -217,7 +217,6 @@ local AddCases = {
 
 		for i,v in add do
 			self:Push(depth+1)
-			print(self.Text)
 			self:Text("[")
 			self:Add(i,depth)
 			self:Text("] = ")
