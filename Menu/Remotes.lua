@@ -482,8 +482,6 @@ local function fired(instance,info)
 	mote:Call(info)
 end
 
-import("modules/RemoteSpy").Signal:Connect(fired)
-
-for i = 1,67 do
-	fired(workspace.RemoteEvent,{args = {{a = {aasd = "b",1},"c"}}})
-end
+janitor:Add(
+	import("modules/RemoteSpy").Signal:Connect(fired)
+)
