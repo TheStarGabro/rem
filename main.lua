@@ -87,15 +87,10 @@ local run_button = Buttons:Create():Text("Wisp"):Image("rbxthumb://type=BadgeIco
 run_button.Frame.MouseButton1Click:Connect(effectButton(run_button,function()
     while task.wait(0.1) do
         game.ReplicatedStorage.Knit.Services.ProgressService.RE.ClientLogProgress:FireServer(
-            "HoverboardBoostAmount",
-            1,
-            {ZoneName = Zone}
-        )
-        
-        game.ReplicatedStorage.Knit.Services.ProgressService.RE.ClientLogProgress:FireServer(
-            "HoverboardTrickAmount",
-            1,
-            {ZoneName = Zone}
+            {
+                IsRunning = true,
+                CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0,0,10)
+            }
         )
     end
 end))
