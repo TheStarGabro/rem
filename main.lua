@@ -30,49 +30,82 @@ currency_button.Frame.MouseButton1Click:Connect(function()
     end
 end)
 
+local function effectButton(button,onfunc,offfunc)
+    return function()
+        button:Toggle()
+
+        if button.task then
+            task.cancel(button.task)
+            button.task = nil
+        end
+    
+        local func
+        if button.state then
+            if onfunc then func = onfunc end
+        else
+            if offfunc then func = offfunc
+        end
+    
+        if func then
+            local task = task.spawn(func)
+    
+            button.task = task
+            janitor:Add(task)
+        end
+    end
+end
+
 local grind_button = Buttons:Create():Text("Grind"):Image("rbxthumb://type=BadgeIcon&id=151504819763412&w=150&h=150"):Popup("Always grind")
-grind_button.Frame.MouseButton1Click:Connect(function()
-    grind_button:Toggle()
-
-    if grind_button.task then
-        task.cancel(grind_button.task)
+grind_button.Frame.MouseButton1Click:Connect(effectButton(grind_button,function()
+    while task.wait(0.1) do
+        game.ReplicatedStorage.Knit.Services.ProgressService.RE.ClientLogProgress:FireServer(
+            "RailGrindPoints",
+            4,
+            {ZoneName = Zone}
+        )
     end
+end))
 
-    if grind_button.state then
-        local task = task.spawn(function()
-            while task.wait(0.1) do
-                game.ReplicatedStorage.Knit.Services.ProgressService.RE.ClientLogProgress:FireServer(
-                    "RailGrindPoints",
-                    4,
-                    {ZoneName = Zone}
-                )
-            end
-        end)
-        grind_button.task = task
-        janitor:Add(task)
+local hoverboard_button = Buttons:Create():Text("Wisp"):Image("rbxthumb://type=BadgeIcon&id=2126304284&w=150&h=150"):Popup("Trick & Boost"):Toggle(true)
+hoverboard_button.Frame.MouseButton1Click:Connect(effectButton(hoverboard_button,function()
+    while task.wait(0.1) do
+        game.ReplicatedStorage.Knit.Services.ProgressService.RE.ClientLogProgress:FireServer(
+            "HoverboardBoostAmount",
+            1,
+            {ZoneName = Zone}
+        )
+
+        game.ReplicatedStorage.Knit.Services.ProgressService.RE.ClientLogProgress:FireServer(
+            "HoverboardTrickAmount",
+            1,
+            {ZoneName = Zone}
+        )
     end
-end)
+end))
+
+local run_button = Buttons:Create():Text("Wisp"):Image("rbxthumb://type=BadgeIcon&id=2126304284&w=150&h=150"):Popup("Trick & Boost"):Toggle(true)
+run_button.Frame.MouseButton1Click:Connect(effectButton(run_button,function()
+    while task.wait(0.1) do
+        game.ReplicatedStorage.Knit.Services.ProgressService.RE.ClientLogProgress:FireServer(
+            "HoverboardBoostAmount",
+            1,
+            {ZoneName = Zone}
+        )
+        
+        game.ReplicatedStorage.Knit.Services.ProgressService.RE.ClientLogProgress:FireServer(
+            "HoverboardTrickAmount",
+            1,
+            {ZoneName = Zone}
+        )
+    end
+end))
 
 local wisp_button = Buttons:Create():Text("Wisp"):Image("rbxthumb://type=BadgeIcon&id=168551842&w=150&h=150"):Popup("+5 Wisp"):Toggle(true)
 wisp_button.Frame.MouseButton1Click:Connect(function()
     game.ReplicatedStorage.Knit.Services.MapStateService.RE.OnStateAction:FireServer("AddEventCurrency","Whisper",5,true)
 end)
 
-local hydroxide_button = Buttons:Create():Text("Hydroxide"):Image(""):Popup("Toggle Hydroxide")
-hydroxide_button.Frame.MouseButton1Click:Connect(function()
-    hydroxide_button:Toggle()
 
-    if hydroxide_button.state then
-        if not hydroxide_button.active then
-            hydroxide_button.active = true
-            loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/Hydroxide/init.lua"))()
-            loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/Hydroxide/ui/main.lua"))()
-        end
-    end
-
-    local ui = hydroxideImport("ui/main")
-    ui.Enabled = hydroxide_button.state
-end)
 
 -- Set default zone
 for i,v in game.ReplicatedStorage.Knit.Services.WorldCurrencyService.RF.GetRegistry:InvokeServer() do

@@ -355,7 +355,7 @@ function Mote.new(remote)
 	iconaspect.Parent = icon
 
 	local name = Instance.new("TextLabel")
-	name.Text = remote.Name
+	name.Text = remote:GetFullName()
 	name.TextScaled = true
 	name.TextColor3 = Color3.new(1,1,1)
 	name.Font = FONT
@@ -420,7 +420,7 @@ function Mote:View()
 
 	local log = Log.new(CALLS_LINES)
 	self.log = log
-	
+
 	callsnavnumber.Text = tostring(calls_page_index).."/"..math.ceil(#self.CallList/CALLS_DISPLAYED)
 
 	for c = CALLS_DISPLAYED*(calls_page_index-1)+1,CALLS_DISPLAYED*calls_page_index do
