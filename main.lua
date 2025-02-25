@@ -66,7 +66,7 @@ grind_button.Frame.MouseButton1Click:Connect(effectButton(grind_button,function(
     end
 end))
 
-local hoverboard_button = Buttons:Create():Text("Wisp"):Image("rbxthumb://type=BadgeIcon&id=2126304284&w=150&h=150"):Popup("Trick & Boost"):Toggle(true)
+local hoverboard_button = Buttons:Create():Text("Hoverboard"):Image("rbxthumb://type=BadgeIcon&id=2126304284&w=150&h=150"):Popup("Trick & Boost"):Toggle(true)
 hoverboard_button.Frame.MouseButton1Click:Connect(effectButton(hoverboard_button,function()
     while task.wait(0.1) do
         game.ReplicatedStorage.Knit.Services.ProgressService.RE.ClientLogProgress:FireServer(
@@ -83,7 +83,7 @@ hoverboard_button.Frame.MouseButton1Click:Connect(effectButton(hoverboard_button
     end
 end))
 
-local run_button = Buttons:Create():Text("Wisp"):Image("rbxthumb://type=BadgeIcon&id=2126304284&w=150&h=150"):Popup("Trick & Boost"):Toggle(true)
+local run_button = Buttons:Create():Text("Run"):Image("rbxthumb://type=BadgeIcon&id=2126202654&w=150&h=150"):Popup("Trick & Boost"):Toggle(true)
 run_button.Frame.MouseButton1Click:Connect(effectButton(run_button,function()
     while task.wait(0.1) do
         game.ReplicatedStorage.Knit.Services.CharacterService.RE.UpdateCharacterState:FireServer(
