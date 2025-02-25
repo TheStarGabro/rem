@@ -86,7 +86,7 @@ end))
 local run_button = Buttons:Create():Text("Wisp"):Image("rbxthumb://type=BadgeIcon&id=2126304284&w=150&h=150"):Popup("Trick & Boost"):Toggle(true)
 run_button.Frame.MouseButton1Click:Connect(effectButton(run_button,function()
     while task.wait(0.1) do
-        game.ReplicatedStorage.Knit.Services.ProgressService.RE.ClientLogProgress:FireServer(
+        game.ReplicatedStorage.Knit.Services.CharacterService.RE.UpdateCharacterState:FireServer(
             {
                 IsRunning = true,
                 CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0,0,10)
