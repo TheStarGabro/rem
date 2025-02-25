@@ -2,7 +2,6 @@
 
 print("Main: "..tostring(os.clock()))
 
-local hydroxideImport = import
 local import = rem.import
 local janitor = rem.janitor
 
