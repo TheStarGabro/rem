@@ -41,9 +41,9 @@ local function effectButton(button,onfunc,offfunc)
     
         local func
         if button.state then
-            if onfunc then func = onfunc
+            if onfunc then func = onfunc end
         else
-            if offfunc then func = offfunc
+            if offfunc then func = offfunc end
         end
     
         if func then
