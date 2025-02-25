@@ -5,12 +5,14 @@ print("Main")
 local hydroxideImport = import
 local import = rem.import
 local janitor = rem.janitor
-local print = import("modules/Output").print
 
 local RemoteSpy = import("modules/RemoteSpy")
 local Signal = import("constructors/Signal")
 local Collect = import("modules/Collect")
 local Buttons = import("modules/Buttons")
+
+import("Menu/Output")
+import("Menu/Remotes")
 
 ----------------------------------------------------------------
 
