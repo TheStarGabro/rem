@@ -4,8 +4,9 @@ local FONT = Enum.Font.Arimo
 local LINES = 25
 
 local janitor = rem.janitor
+local import = rem.import
 local TextService = game:GetService("TextService")
-local Menu if game:GetService("RunService"):IsStudio() then Menu = require(script.Parent.Menu) else Menu = rem.import("Modules/Menu") end
+local Menu if game:GetService("RunService"):IsStudio() then Menu = require(script.Parent.Menu) else Menu = import("Modules/Menu") end
 
 local output = Menu:Add("Output")
 

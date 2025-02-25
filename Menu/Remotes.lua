@@ -6,8 +6,9 @@ local CALLS_LINES = 30
 local CALLS_DISPLAYED = 20
 
 local janitor = rem.janitor
+local import = rem.import
 local TextService = game:GetService("TextService")
-local Menu if game:GetService("RunService"):IsStudio() then Menu = require(script.Parent.Menu) else Menu = rem.import("Modules/Menu") end
+local Menu if game:GetService("RunService"):IsStudio() then Menu = require(script.Parent.Menu) else Menu = import("Modules/Menu") end
 
 local remote = Menu:Add("Remote")
 local menu = remote.Menu
@@ -481,7 +482,7 @@ local function fired(instance,info)
 	mote:Call(info)
 end
 
-rem.RemoteSpy.Signal:Connect(fired)
+import("modules/RemoteSpy").Signal:Connect(fired)
 
 for i = 1,67 do
 	fired(workspace.RemoteEvent,{args = {{a = {aasd = "b",1},"c"}}})
