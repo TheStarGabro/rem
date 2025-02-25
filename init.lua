@@ -234,7 +234,6 @@ if not rem.active then
     rem.active = true
 
     rem.janitor = import("constructors/Janitor").new()
-    rem.print = import("modules/Output").print
 end
 
 
