@@ -33,9 +33,9 @@ local remoteMethods = {
 
 local remotesViewing = {
     RemoteEvent = true,
-    RemoteFunction = false,
-    BindableEvent = false,
-    BindableFunction = false
+    RemoteFunction = true,
+    BindableEvent = true,
+    BindableFunction = true
 }
 
 local methodHooks = {

@@ -347,7 +347,10 @@ function Mote.new(remote)
 	local icon = Instance.new("ImageLabel")
 	icon.BackgroundTransparency = 1
 	icon.Size = UDim2.fromScale(1,1)
-	icon.Image = remote:IsA("RemoteEvent") and "rbxassetid://4229806545" or "rbxassetid://4229810474"
+	icon.Image = remote:IsA("RemoteEvent") and "rbxassetid://4229806545" or
+		remote:IsA("RemoteFunction") and "rbxassetid://4229810474" or
+		remote:IsA("BindableEvent") and "rbxassetid://4229809371" or
+		remote:IsA("BindableFunction") and "rbxassetid://4229807624"
 	icon.Parent = button
 
 	local iconaspect = Instance.new("UIAspectRatioConstraint")
