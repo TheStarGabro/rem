@@ -1,17 +1,18 @@
+print("a")
 if game:GetService("RunService"):IsStudio() then rem = setmetatable({},{__index = function(t) return t end,__call = function(t) return t end}) end
-
+print("b")
 local FONT = Enum.Font.Arimo
 local LINES = 25
-
+print("c")
 local janitor = rem.janitor
 local TextService = game:GetService("TextService")
 local Menu if game:GetService("RunService"):IsStudio() then Menu = require(script.Parent.Menu) else Menu = import("Modules/Menu") end
-
+print("d")
 local output = Menu:Add("Output")
-
+print(output)
 local OutputMeta = {}
 OutputMeta.__index = OutputMeta
-
+print("e")
 -------------------------------------------------------------------
 
 local scroll = Instance.new("ScrollingFrame")
