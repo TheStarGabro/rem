@@ -147,7 +147,7 @@ janitor:Add(
 )
 
 local flashscreen = instance.new("ScreenGui")
-flashscreen.Parent = game.CoreGui
+flashscreen.Parent = game.Players.LocalPlayer.PlayerGui
 
 local flash = Instance.new("TextLabel")
 flash.Text = "MAIN LOADED"
