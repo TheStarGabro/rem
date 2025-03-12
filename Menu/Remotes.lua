@@ -1,7 +1,7 @@
 if game:GetService("RunService"):IsStudio() then rem = setmetatable({},{__index = function(t) return t end,__call = function(t) return t end}) end
 
 local FONT = Enum.Font.Arimo
-local MOTE_HEIGHT = 0.05
+local MOTE_HEIGHT = 0.02
 local CALLS_LINES = 30
 local CALLS_DISPLAYED = 20
 
@@ -404,6 +404,7 @@ function Mote:Block(state:boolean)
 
 	self.Blocked = state
 	local color = state and Color3.new(0.4, 0, 0) or Color3.new(1,1,1)
+	self.UI.Size = UDim2.fromScale(1,MOTE_HEIGHT*0.1)
 	self.UI.Name.TextColor3 = color
 	self.UI.Count.TextColor3 = color
 end
