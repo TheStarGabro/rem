@@ -98,6 +98,7 @@ originalMethod = hookMetaMethod(game, "__namecall", function(...)
             }
 
             remote.IncrementCalls(remote, call)
+            print(remoteSignal,remoteSignal.Fire)
             remoteSignal:Fire(instance, call)
 
             local first_arg = ...
