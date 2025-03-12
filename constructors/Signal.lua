@@ -86,6 +86,8 @@ function Signal:Yieldable(state:bool)
 
 	self.yieldable = state
 	self.run = state and function(f,...) f(...) end or nil
+
+	return self
 end
 
 function Signal:DisconnectAll()
