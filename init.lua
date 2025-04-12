@@ -1,3 +1,4 @@
+print("initA")
 local environment = assert(getgenv, "<OH> ~ Your exploit is not supported")()
 
 local r = environment.rem or {}
@@ -110,6 +111,7 @@ globalMethods.getUpvalues = function(closure)
     return oldGetUpvalues(closure)
 end
 
+print("INITB")
 rem.hasMethods = hasMethods
 rem.oh = {
     Events = {},
@@ -169,6 +171,7 @@ rem.oh = {
     end
 }
 
+print("INITGG")
 if getConnections then 
     for __, connection in pairs(getConnections(game:GetService("ScriptContext").Error)) do
 
@@ -206,6 +209,7 @@ if sha ~= rem.sha then
     
 end
 
+print("initZ")
 local importCache = {}
 local import = function(asset)
     if importCache[asset] then
@@ -226,6 +230,7 @@ local import = function(asset)
     importCache[asset] = assets
     return unpack(assets)
 end
+print("INITASDAS")
 rem.import = import
 rem.sha = sha
 
