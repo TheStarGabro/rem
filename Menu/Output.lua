@@ -348,3 +348,7 @@ janitor:Add(
 		end
 	end)
 )
+
+return {
+	print = add
+}
