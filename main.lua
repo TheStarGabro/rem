@@ -1,19 +1,22 @@
 --loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TheStarGabro/rem/main/main.lua"))()
 
+print("a")
 print("Main: "..tostring(os.clock()))
-
+print("b")
 local import = rem.import
 local janitor = rem.janitor
-
+print("c")
 local RemoteSpy = import("modules/RemoteSpy")
 local Signal = import("constructors/Signal")
 local Collect = import("modules/Collect")
 local Buttons = import("modules/Buttons")
-
+print("d")
 local Output = import("Menu/Output")
+print("e")
 local print = Output.print
+print("f")
 import("Menu/Remotes")
-
+print("g")
 ----------------------------------------------------------------
 
 local Zone
