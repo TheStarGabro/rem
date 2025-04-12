@@ -10,7 +10,8 @@ local Signal = import("constructors/Signal")
 local Collect = import("modules/Collect")
 local Buttons = import("modules/Buttons")
 
-import("Menu/Output")
+local Output = import("Menu/Output")
+local print = Output.print
 import("Menu/Remotes")
 
 ----------------------------------------------------------------
@@ -113,6 +114,10 @@ janitor:Add(
     RemoteSpy.Signal:Connect(function(instance,info)
         OnEventMulti:TryFire(instance,info)
     end),
+    
+    OnEventMulti(game.ReplicatedStorage.Knit.Services.MapStateService.RE.OnStateAction):Connect(function(info)
+        print(info)
+    end)
 
     OnEventMulti(game.ReplicatedStorage.Knit.Services.ZoneService.RE.ZoneLoaded):Connect(function(info)
         Zone = info.args[1]
