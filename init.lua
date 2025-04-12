@@ -218,6 +218,7 @@ local import = function(asset)
         assets = { game:GetObjects(asset)[1] }
     elseif web then
         local content = game:HttpGetAsync("https://raw.githubusercontent.com/" .. user .. "/"..rep.."/" .. branch .. '/' .. asset .. ".lua")
+        print(content)
         assets = { loadstring(content, asset .. '.lua')() }
     else
         print("Can't make import function.")
